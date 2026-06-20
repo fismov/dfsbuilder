@@ -23,7 +23,9 @@ jobs:
     
     - name: Build DFS
       run: |
-        cd core/app/service/dfs/cmd/dfs
+        ls -la
+        find . -name "main.go" -path "*/dfs/*"
+        cd core/app/service/dfs/cmd/dfs || cd app/service/dfs/cmd/dfs || exit 1
         go build -o ../../../../dfs-linux-amd64
     
     - name: Upload artifact
