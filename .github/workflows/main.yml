@@ -13,6 +13,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
+    - name: Clone teamgram-server
+      run: |
+        git clone https://github.com/teamgram/teamgram-server.git
+        cd teamgram-server
+    
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
@@ -23,13 +28,14 @@ jobs:
     
     - name: Build DFS
       run: |
+        cd teamgram-server
         ls -la
         find . -name "main.go" -path "*/dfs/*"
-        cd core/app/service/dfs/cmd/dfs || cd app/service/dfs/cmd/dfs || exit 1
+        cd app/service/dfs/cmd/dfs
         go build -o ../../../../dfs-linux-amd64
     
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: dfs-linux-amd64
-        path: core/dfs-linux-amd64
+        path: teamgram-server/dfs-linux-amd64
