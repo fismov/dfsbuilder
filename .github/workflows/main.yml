@@ -33,6 +33,8 @@ jobs:
         find . -name "main.go" -path "*/dfs/*"
         cd app/service/dfs/cmd/dfs
         go build -o ../../../../dfs-linux-amd64
+        ls -la ../../../../dfs-linux-amd64 || echo "FILE NOT FOUND"
+        find ../../.. -name "dfs-linux-amd64"
     
     - name: Upload artifact
       uses: actions/upload-artifact@v4
